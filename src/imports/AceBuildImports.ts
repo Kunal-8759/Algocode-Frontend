@@ -1,3 +1,4 @@
+
 // Import all themes
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-github";
@@ -23,21 +24,22 @@ import "ace-builds/src-noconflict/mode-python";
 // Import language tools
 import "ace-builds/src-noconflict/ext-language_tools";
 
-// Re-export everything
-export * from "ace-builds/src-noconflict/theme-monokai";
-export * from "ace-builds/src-noconflict/theme-github";
-export * from "ace-builds/src-noconflict/theme-github_dark";
-export * from "ace-builds/src-noconflict/theme-tomorrow";
-export * from "ace-builds/src-noconflict/theme-kuroir";
-export * from "ace-builds/src-noconflict/theme-twilight";
-export * from "ace-builds/src-noconflict/theme-xcode";
-export * from "ace-builds/src-noconflict/theme-textmate";
-export * from "ace-builds/src-noconflict/theme-solarized_dark";
-export * from "ace-builds/src-noconflict/theme-solarized_light";
-export * from "ace-builds/src-noconflict/theme-terminal";
-export * from 'ace-builds/src-noconflict/ace';
-export * from "ace-builds/src-noconflict/mode-javascript";
-export * from "ace-builds/src-noconflict/mode-c_cpp";
-export * from "ace-builds/src-noconflict/mode-java";
-export * from "ace-builds/src-noconflict/mode-python";
-export * from "ace-builds/src-noconflict/ext-language_tools";
+// Since re-exporting is causing issues, you might not need to re-export these.
+// If you still need to export them, you can do named exports like this:
+export { monokai } from "ace-builds/src-noconflict/theme-monokai";
+export { github } from "ace-builds/src-noconflict/theme-github";
+export { github_dark } from "ace-builds/src-noconflict/theme-github_dark";
+export { tomorrow } from "ace-builds/src-noconflict/theme-tomorrow";
+export { kuroir } from "ace-builds/src-noconflict/theme-kuroir";
+export { twilight } from "ace-builds/src-noconflict/theme-twilight";
+export { xcode } from "ace-builds/src-noconflict/theme-xcode";
+export { textmate } from "ace-builds/src-noconflict/theme-textmate";
+export { solarized_dark } from "ace-builds/src-noconflict/theme-solarized_dark";
+export { solarized_light } from "ace-builds/src-noconflict/theme-solarized_light";
+export { terminal } from "ace-builds/src-noconflict/theme-terminal";
+export { ace } from 'ace-builds/src-noconflict/ace';
+export { javascript } from "ace-builds/src-noconflict/mode-javascript";
+export { c_cpp } from "ace-builds/src-noconflict/mode-c_cpp";
+export { java } from "ace-builds/src-noconflict/mode-java";
+export { python } from "ace-builds/src-noconflict/mode-python";
+export { language_tools } from "ace-builds/src-noconflict/ext-language_tools";
