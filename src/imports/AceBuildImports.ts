@@ -1,4 +1,3 @@
-
 // Import all themes
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-github";
@@ -24,8 +23,7 @@ import "ace-builds/src-noconflict/mode-python";
 // Import language tools
 import "ace-builds/src-noconflict/ext-language_tools";
 
-// Since re-exporting is causing issues, you might not need to re-export these.
-// If you still need to export them, you can do named exports like this:
+// Export themes and modes
 export { monokai } from "ace-builds/src-noconflict/theme-monokai";
 export { github } from "ace-builds/src-noconflict/theme-github";
 export { github_dark } from "ace-builds/src-noconflict/theme-github_dark";

@@ -1,4 +1,3 @@
-
 import { useState, DragEvent } from 'react';
 import AceEditor from 'react-ace';
 import axios from 'axios';
@@ -20,11 +19,8 @@ type themeStyle = {
     value: string
 }
 
-function Description({ descriptionText }: {descriptionText: string}) {
-
-
+function Description({ descriptionText }: { descriptionText: string }) {
     const sanitizedMarkdown = DOMPurify.sanitize(descriptionText);
-
 
     const [activeTab, setActiveTab] = useState('statement');
     const [testCaseTab, setTestCaseTab] = useState('input');
@@ -36,17 +32,17 @@ function Description({ descriptionText }: {descriptionText: string}) {
 
     async function handleSubmission() {
         try {
-            console.log(code)
-            console.log(language)
+            console.log(code);
+            console.log("Language is",language);
             const response = await axios.post("http://localhost:4000/api/v1/submissions", {
                 code,
                 language,
                 userId: "30",
-                problemId: "669d52641376bec6007e6b46"
+                problemId: "669dc8419b27f311dc141919"
             });
             console.log(response);
             return response;
-        } catch(error) {
+        } catch (error) {
             console.log(error);
         }
     }
@@ -57,48 +53,35 @@ function Description({ descriptionText }: {descriptionText: string}) {
     }
 
     const stopDragging = () => {
-        if(isDragging) {
+        if (isDragging) {
             setIsDragging(false);
         }
     }
 
     const onDrag = (e: DragEvent<HTMLDivElement>) => {
-        if(!isDragging) return;
-        
+        if (!isDragging) return;
+
         const newLeftWidth = (e.clientX / window.innerWidth) * 100;
-        if(newLeftWidth > 10 && newLeftWidth < 90) {
+        if (newLeftWidth > 10 && newLeftWidth < 90) {
             setLeftWidth(newLeftWidth);
         }
-
     }
 
     const isActiveTab = (tabName: string) => {
-        if(activeTab === tabName) {
-            return 'tab tab-active';
-        } else {
-            return 'tab'
-        }
+        return activeTab === tabName ? 'tab tab-active' : 'tab';
     }
 
     const isInputTabActive = (tabName: string) => {
-        if(testCaseTab === tabName) {
-            return 'tab tab-active';
-        } else {
-            return 'tab';
-        }
+        return testCaseTab === tabName ? 'tab tab-active' : 'tab';
     }
-
-
 
     return (
         <div 
             className='flex w-screen h-[calc(100vh-57px)]'
             onMouseMove={onDrag}
             onMouseUp={stopDragging}
-            
         >
-
-            <div className='leftPanel h-full overflow-auto' style={{ width: `${leftWidth}%`}}>
+            <div className='leftPanel h-full overflow-auto' style={{ width: `${leftWidth}%` }}>
 
                 <div role="tablist" className="tabs tabs-boxed w-3/5">
                     <a onClick={() => setActiveTab('statement')} role="tab" className={isActiveTab("statement")}>Problem Statement</a>
@@ -111,13 +94,11 @@ function Description({ descriptionText }: {descriptionText: string}) {
                         {sanitizedMarkdown}
                     </ReactMarkdown>
                 </div>
-
-
             </div>
 
             <div className='divider cursor-col-resize w-[5px] bg-slate-200 h-full' onMouseDown={startDragging}></div>
 
-            <div className='rightPanel h-full overflow-auto flex flex-col' style={{ width: `${100-leftWidth}%`}}>
+            <div className='rightPanel h-full overflow-auto flex flex-col' style={{ width: `${100 - leftWidth}%` }}>
 
                 <div className='flex gap-x-1.5 justify-start items-center px-4 py-2 basis-[5%]'>
                     <div>
@@ -132,14 +113,13 @@ function Description({ descriptionText }: {descriptionText: string}) {
                             value={language}
                             onChange={(e) => setLanguage(e.target.value)}
                         >
-                            
                             {Languages.map((language: languageSupport) => (
                                 <option key={language.value} value={language.value}> {language.languageName} </option>
                             ))}
                         </select>
                     </div>
                     <div>
-                    <select 
+                        <select 
                             className="select select-info w-full select-sm max-w-xs" 
                             value={theme}
                             onChange={(e) => setTheme(e.target.value)}
@@ -149,11 +129,9 @@ function Description({ descriptionText }: {descriptionText: string}) {
                             ))}
                         </select>
                     </div>
-
                 </div>
-                
-                <div className="flex flex-col editor-console grow-[1] ">
 
+                <div className="flex flex-col editor-console grow-[1] ">
                     <div className='editorContainer grow-[1]'>
                         <AceEditor
                             mode={language}
@@ -162,7 +140,7 @@ function Description({ descriptionText }: {descriptionText: string}) {
                             onChange={(e: string) => setCode(e)}
                             name='codeEditor'
                             className='editor'
-                            style={{ width: '100%'}}
+                            style={{ width: '100%' }}
                             setOptions={{
                                 enableBasicAutocompletion: true,
                                 enableLiveAutocompletion: true,
@@ -173,27 +151,22 @@ function Description({ descriptionText }: {descriptionText: string}) {
                         />
                     </div>
 
-                    { /* Collapsable test case part */ }
-
+                    { /* Collapsible test case part */ }
                     <div className="collapse bg-base-200 rounded-none">
                         <input type="checkbox" className="peer" /> 
                         <div className="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
                             Console
                         </div>
                         <div className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content"> 
-                        <div role="tablist" className="tabs tabs-boxed w-3/5 mb-4">
-                            <a onClick={() => setTestCaseTab('input')} role="tab" className={isInputTabActive('input')}>Input</a>
-                            <a onClick={() => setTestCaseTab('output')} role="tab" className={isInputTabActive('output')}>Output</a>
-                        </div>
-                            
+                            <div role="tablist" className="tabs tabs-boxed w-3/5 mb-4">
+                                <a onClick={() => setTestCaseTab('input')} role="tab" className={isInputTabActive('input')}>Input</a>
+                                <a onClick={() => setTestCaseTab('output')} role="tab" className={isInputTabActive('output')}>Output</a>
+                            </div>
                             {(testCaseTab === 'input') ? <textarea rows={4} cols={70} className='bg-neutral text-white rounded-md resize-none'/> : <div className='w-12 h-8'></div>}
                         </div>
                     </div>
-                
                 </div>
-
             </div>
-
         </div>
     )
 }
